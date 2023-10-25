@@ -107,6 +107,7 @@ nextBtn.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', () => {
     questionNumber = 0
+    score = 0
     bringQuestionsIntoQuiz()
     responseModal.removeAttribute('style')
     correctOrNot.removeAttribute('style')
