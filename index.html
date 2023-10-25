@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Quiz Game</title>
+</head>
+<body>
+    <h1>Odd Historical Trivial Quiz</h1>
+
+    <div class="quiz-container">
+
+        <div class="begin-modal">
+            <p>Welcome to my unusual old trivia game, I hope youve brushed up on your quirky history!</p>
+            <button class="beginBtn">Begin</button>
+        </div>
+
+        <div class="question">This is the Quiz Question</div>
+        <div class="answers-container">
+            <div class="answer option-one" tabindex="0">Answer 1</div>
+            <div class="answer option-two" tabindex="0">Second Option</div>
+            <div class="answer option-three" tabindex="0">This is the third choice</div>
+            <div class="answer option-four" tabindex="0">Four</div>
+        </div>
+    </div>
+
+    <div class="response-modal hidden">
+        <div class="correct-or-not">Correct!</div>
+        <small id="small-div">The correct answer is:<br><span class="correct-answer-is">answer 4</span></small>
+        <div class="modal-buttons">
+            <button class="reset-quiz">Reset Quiz</button>
+            <button class="next-question">Next Question</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
