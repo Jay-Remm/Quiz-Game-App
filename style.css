@@ -68,6 +68,7 @@ h1 {
 .begin-modal p {
     margin: 2rem 0;
     font-size: 1.5rem;
+    width: 90%;
 }
 
 .beginBtn {
@@ -250,9 +251,13 @@ h1 {
 
 @media(max-width: 500px) {
 
+    body {
+        overflow-y: auto;
+    }
+
     .quiz-container {
         width: 90%;
-        height: 80%;
+        height: 66%;
     }
 
     h1 {
@@ -265,5 +270,13 @@ h1 {
 
     .response-modal {
         width: 75%;
+    }
+
+    .answers-container {
+        overflow-y: scroll;
+    }
+
+    .question {
+        font-size: 1.25rem;
     }
 }
