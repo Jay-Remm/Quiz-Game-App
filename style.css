@@ -256,7 +256,7 @@ h1 {
 
     .quiz-container {
         width: 90%;
-        height: 66%;
+        height: 75%;
     }
 
     h1 {
@@ -269,10 +269,6 @@ h1 {
 
     .response-modal {
         width: 75%;
-    }
-
-    .answers-container {
-        overflow-y: auto;
     }
 
     .question {
