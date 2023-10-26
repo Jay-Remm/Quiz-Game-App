@@ -1,25 +1,12 @@
-const questionDiv = document.querySelector('.question')
-const option1 = document.querySelector('.option-one')
-const option2 = document.querySelector('.option-two')
-const option3 = document.querySelector('.option-three')
-const option4 = document.querySelector('.option-four')
-const correctAnswerIs = document.querySelector('.correct-answer-is')
 const answers = document.querySelectorAll('.answer')
-const correctOrNot = document.querySelector('.correct-or-not')
-const responseModal = document.querySelector('.response-modal')
-const resetBtn = document.querySelector('.reset-quiz')
-const nextBtn = document.querySelector('.next-question')
-const smallCorrectAnswerDiv = document.getElementById('small-div')
-const beginModal = document.querySelector('.begin-modal')
-const beginBtn = document.querySelector('.beginBtn')
 
-// Fun rainbow border glow for the game box
-const quizContainer = document.querySelector('.quiz-container')
-
+// Fun Rainbow quiz boarder
 function rainbowContainer() {
-    quizContainer.style.boxShadow = `0px 0px 10px 4px ${randomColor()}`
-    quizContainer.style.transition = 'box-shadow 2s linear'
 
+    $('.quiz-container').css({
+        'box-shadow': `0px 0px 10px 4px ${randomColor()}`,
+        'transition': 'box-shadow 2s linear'
+    })
 }
 
 function randomColor() {
@@ -35,98 +22,94 @@ function randomColor() {
 let questionNumber = 0
 let score = 0
 
+
 function bringQuestionsIntoQuiz() {
+
     fetch('./questions.json')
     .then(res => res.json())
     .then(data => {
         allQuestions = Object.values(data)
         let singleQuestion = allQuestions[questionNumber]
 
-        questionDiv.innerText = singleQuestion.question
-        option1.innerText = singleQuestion.answers[0]
-        option2.innerText = singleQuestion.answers[1]
-        option3.innerText = singleQuestion.answers[2]
-        option4.innerText = singleQuestion.answers[3]
-        correctAnswerIs.innerText = singleQuestion.correctAnswer
-        
-    }) 
+
+        $('.question').text(singleQuestion.question)
+        $('.option-one').text(singleQuestion.answers[0])
+        $('.option-two').text(singleQuestion.answers[1])
+        $('.option-three').text(singleQuestion.answers[2])
+        $('.option-four').text(singleQuestion.answers[3])
+        $('.correct-answer-is').text(singleQuestion.correctAnswer)
+    })
+    
 }
+
 
 answers.forEach(answer => {
     answer.addEventListener('click', () => {
-        if (answer.innerText === correctAnswerIs.innerText) {
+        if (answer.innerText === $('.correct-answer-is').text()) {
             answer.classList.add('correct')
-
-            // Style for the modal
-            responseModal.classList.remove('hidden')
-            correctOrNot.innerText = 'Correct!'
+            $('.response-modal').removeClass('hidden')
+            $('.correct-or-not').text('Correct!')
             score++
-
         } else {
-
             answer.classList.add('incorrect')
-            
-            responseModal.classList.remove('hidden')
-            responseModal.style.borderColor = 'red'
-            correctOrNot.innerText = 'Incorrect'
-            correctOrNot.style.color = 'red'
+            $('.response-modal').removeClass('hidden')
+            $('.response-modal').css('border-color', 'red')
+            $('.correct-or-not').text('Incorrect')
+            $('.correct-or-not').css('color', 'red')
         }
     })
 })
 
-nextBtn.addEventListener('click', () => {
+
+$('.next-question').on('click', function() {
     if (questionNumber === 8) {
         questionNumber++
         bringQuestionsIntoQuiz()
-        responseModal.removeAttribute('style')
-        correctOrNot.removeAttribute('style')
-        responseModal.classList.add('hidden')
-
+        $('.response-modal').removeAttr('style')
+        $('.correct-or-not').removeAttr('style')
+        $('.response-modal').addClass('hidden')
         answers.forEach(answer => {
             answer.classList.remove('correct', 'incorrect')
         })
-
-        nextBtn.innerText = 'Check score'
+        $('.next-question').text('Check score')
     } else if (questionNumber === 9) {
-        nextBtn.style.display = 'none'
-        correctOrNot.innerText = `${score}/10`
-        smallCorrectAnswerDiv.style.display = 'none'
-
+        $('.next-question').css('display', 'none')
+        $('.correct-or-not').text(`${score}/10`)
+        $('.small-div').css('display', 'none')
     } else {
         questionNumber++
         bringQuestionsIntoQuiz()
-        responseModal.removeAttribute('style')
-        correctOrNot.removeAttribute('style')
-        responseModal.classList.add('hidden')
-
+        $('.response-modal').removeAttr('style')
+        $('.correct-or-not').removeAttr('style')
+        $('.response-modal').addClass('hidden')
         answers.forEach(answer => {
             answer.classList.remove('correct', 'incorrect')
         })
     }
 })
 
-resetBtn.addEventListener('click', () => {
+
+$('.reset-quiz').on('click', function() {
     questionNumber = 0
     score = 0
     bringQuestionsIntoQuiz()
-    responseModal.removeAttribute('style')
-    correctOrNot.removeAttribute('style')
-    smallCorrectAnswerDiv.removeAttribute('style')
-    nextBtn.removeAttribute('style')
-    nextBtn.innerText = 'Next Question'
-    responseModal.classList.add('hidden')
-    beginModal.classList.remove('hidden')
+    $('.response-modal').removeAttr('style')
+    $('.correct-or-not').removeAttr('style')
+    $('.small-div').removeAttr('style')
+    $('.next-question').removeAttr('style')
+    $('.next-question').text('Next Question')
+    $('.response-modal').addClass('hidden')
+    $('.begin-modal').removeClass('hidden')
 
     answers.forEach(answer => {
         answer.classList.remove('correct', 'incorrect')
     })
 })
 
-beginBtn.addEventListener('click', () => {
-    beginModal.classList.add('hidden')
+
+$('.beginBtn').on('click', function() {
+    $('.begin-modal').addClass('hidden')
 })
-
-
 
 
 // Run
